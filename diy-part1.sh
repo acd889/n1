@@ -14,11 +14,11 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
-
+echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> "feeds.conf.default"
+echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main" >> "feeds.conf.default"
 # 删除重复包
 
-rm -rf feeds/luci/applications/luci-app-passwall
+#rm -rf feeds/luci/applications/luci-app-passwall
 
 # 更换最新的golang版本
 #rm -rf feeds/packages/lang/golang
