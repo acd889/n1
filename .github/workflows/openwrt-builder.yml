@@ -152,10 +152,9 @@ jobs:
 
     # 将状态写入 GitHub Actions 输出
     echo "status=success" >> $GITHUB_OUTPUT
-  env:
-    GOFILE_URL: ${{ steps.gofile.outputs.url }}
+    env:GOFILE_URL: ${{ steps.gofile.outputs.url }}
      
-      - name: Upload firmware to release
+    - name: Upload firmware to release
       uses: softprops/action-gh-release@master
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
