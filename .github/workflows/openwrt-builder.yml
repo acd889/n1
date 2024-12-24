@@ -140,22 +140,12 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-       echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
-
-    # 初始化 release.txt
-    touch: release.txt
-
-    # 使用环境变量存储 Actions 输出值
-if [ "$UPLOAD_GOFILE" = "true" ] && [ -n "$GOFILE_URL" ]; then
-echo "🔗 [GoFile]($GOFILE_URL)" >> release.txt
-    fi
-
-    # 将状态写入 GitHub Actions 输出
-    echo "status=success" >> $GITHUB_OUTPUT
-  env:
-    GOFILE_URL: ${{ steps.gofile.outputs.url }}
-
-     - name: Upload firmware to release
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
+        touch release.txt
+        [ ${UPLOAD_GOFILE} = true && ${{ steps.gofile.outputs.url }} ] && echo "🔗 [GoFile](${{ steps.gofile.outputs.url }})" >> release.txt
+        echo "status=success" >> $GITHUB_OUTPUT
+     
+    - name: Upload firmware to release
       uses: softprops/action-gh-release@master
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
