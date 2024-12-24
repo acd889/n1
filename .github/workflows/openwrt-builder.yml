@@ -146,8 +146,8 @@ jobs:
     touch: release.txt
 
     # 使用环境变量存储 Actions 输出值
-  if [ "$UPLOAD_GOFILE" = "true" ] && [ -n "$GOFILE_URL" ]; then
-        echo "🔗 [GoFile]($GOFILE_URL)" >> release.txt
+if [ "$UPLOAD_GOFILE" = "true" ] && [ -n "$GOFILE_URL" ]; then
+echo "🔗 [GoFile]($GOFILE_URL)" >> release.txt
     fi
 
     # 将状态写入 GitHub Actions 输出
